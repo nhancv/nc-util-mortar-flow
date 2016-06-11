@@ -1,9 +1,11 @@
-package com.nhancv.mortarflow;
+package com.nhancv.mortarflow.mortar;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.nhancv.mortarflow.R;
 
 import javax.inject.Inject;
 

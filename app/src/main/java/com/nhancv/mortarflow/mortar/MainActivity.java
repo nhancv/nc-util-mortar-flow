@@ -1,14 +1,14 @@
-package com.nhancv.mortarflow;
+package com.nhancv.mortarflow.mortar;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import flow.Flow;
+import com.nhancv.mortarflow.R;
+
 import mortar.MortarScope;
 import mortar.bundler.BundleServiceRunner;
 
-import static com.nhancv.mortarflow.DaggerService.createComponent;
+import static com.nhancv.mortarflow.mortar.DaggerService.createComponent;
 import static mortar.MortarScope.buildChild;
 import static mortar.MortarScope.findChild;
 
@@ -56,18 +56,5 @@ public class MainActivity extends AppCompatActivity {
         return getClass().getName();
     }
 
-    //Install flow https://github.com/square/flow
-    @Override
-    protected void attachBaseContext(Context baseContext) {
-        baseContext = Flow.configure(baseContext, this).install();
-        super.attachBaseContext(baseContext);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (!Flow.get(this).goBack()) {
-            super.onBackPressed();
-        }
-    }
 
 }
