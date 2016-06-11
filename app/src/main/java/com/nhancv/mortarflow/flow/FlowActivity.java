@@ -19,7 +19,11 @@ public class FlowActivity extends AppCompatActivity {
     //Install flow https://github.com/square/flow
     @Override
     protected void attachBaseContext(Context baseContext) {
-        baseContext = Flow.configure(baseContext, this).install();
+        baseContext = Flow.configure(baseContext, this)
+                .dispatcher(new BasicDispatcher(this))
+                .defaultKey(new WelcomeScreen())
+                .keyParceler(new BasicKeyParceler())
+                .install();
         super.attachBaseContext(baseContext);
     }
 
@@ -29,4 +33,5 @@ public class FlowActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
 }
