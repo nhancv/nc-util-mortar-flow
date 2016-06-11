@@ -1,8 +1,10 @@
 package com.nhancv.mortarflow;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import flow.Flow;
 import mortar.MortarScope;
 import mortar.bundler.BundleServiceRunner;
 
@@ -12,7 +14,8 @@ import static mortar.MortarScope.findChild;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Override public Object getSystemService(String name) {
+    @Override
+    public Object getSystemService(String name) {
         MortarScope activityScope = findChild(getApplicationContext(), getScopeName());
 
         if (activityScope == null) {
@@ -25,18 +28,22 @@ public class MainActivity extends AppCompatActivity {
         return activityScope.hasService(name) ? activityScope.getService(name)
                 : super.getSystemService(name);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BundleServiceRunner.getBundleServiceRunner(this).onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    @Override protected void onSaveInstanceState(Bundle outState) {
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         BundleServiceRunner.getBundleServiceRunner(this).onSaveInstanceState(outState);
     }
 
-    @Override protected void onDestroy() {
+    @Override
+    protected void onDestroy() {
         if (isFinishing()) {
             MortarScope activityScope = findChild(getApplicationContext(), getScopeName());
             if (activityScope != null) activityScope.destroy();
@@ -47,6 +54,20 @@ public class MainActivity extends AppCompatActivity {
 
     private String getScopeName() {
         return getClass().getName();
+    }
+
+    //Install flow https://github.com/square/flow
+    @Override
+    protected void attachBaseContext(Context baseContext) {
+        baseContext = Flow.configure(baseContext, this).install();
+        super.attachBaseContext(baseContext);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!Flow.get(this).goBack()) {
+            super.onBackPressed();
+        }
     }
 
 }
