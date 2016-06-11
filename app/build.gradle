@@ -5,16 +5,24 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.2'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.3'
+
     }
 }
 
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
+    dexOptions {
+        incremental = true;
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
 
     defaultConfig {
         applicationId "com.nhancv.mortarflow"
@@ -36,6 +44,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.squareup.mortar:mortar:0.20'
+    compile 'com.squareup.flow:flow:1.0.0-alpha'
     compile 'com.google.dagger:dagger:2.0'
     apt 'com.google.dagger:dagger-compiler:2.0'
     provided 'org.glassfish:javax.annotation:10.0-b28'
