@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.nhancv.mortarflow.MainView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:text="WTF!?"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Rotate me and watch the update count increase."
+        android:textSize="18sp"
+        android:gravity="center"
+        tools:ignore="HardcodedText"
+        />
+
+</com.nhancv.mortarflow.MainView>
